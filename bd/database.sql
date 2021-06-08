@@ -9,8 +9,8 @@ create table if not exists employee(
     type enum("admin","searcher","stock")
 );
 
-create table if not exists Product(
+create table if not exists product(
 	productId bigint primary key auto_increment unique not null,
     description varchar(50) not null,
-    unitPrice Decimal(2)
+    unitPrice Decimal(10,2)
 );

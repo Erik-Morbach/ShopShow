@@ -5,7 +5,7 @@
     $databaseName = "shopShow";
 
     $connection = new mysqli($serverName,$user,$password,$databaseName);
-    if(!$conn){
+    if(!$connection){
         die("Connection Failure");
     }
 ?>
