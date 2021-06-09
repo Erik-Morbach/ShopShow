@@ -1,7 +1,7 @@
 <?php
     $response = NULL;
     if(isset($_POST["productName"])){
-        require("connection.php");
+        require("../connection.php");
         
         $inputProductName = $_POST["productName"];
 
