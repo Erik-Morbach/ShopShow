@@ -24,7 +24,7 @@
         <div>
             <p> Search Query</p>
             <form action="index.php" method="POST">
-                <input type="text" name="productName">
+                <input type="text" name="description">
                 <input type="submit" name="submitButton" value="Enviar">
             </form>
             <p>

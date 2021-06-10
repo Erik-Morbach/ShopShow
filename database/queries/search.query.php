@@ -1,19 +1,14 @@
 <?php
     $response = NULL;
-    if(isset($_POST["productName"])){
+    if(isset($_POST["description"])){
         require("../connection.php");
         
-        $inputProductName = $_POST["productName"];
+        $inputProductDescription = $_POST["description"];
 
-        $query = "select * from product p where p.description like lower(\"%$inputProductName%\")";
+        $query = "select * from product p where p.description like lower(\"%$inputProductDescription%\")";
         if($result = $connection->query($query)){
             $response = $result->fetch_all(MYSQLI_ASSOC);
         }
         $connection->close();
-    }
-    if(isset($response)){
-        foreach($response as $row){
-            printf("Id %d | Description %s | Price %.2lf<br>",$row["productId"], $row["description"], $row["unitPrice"]);    
-        }
     }
 ?>
