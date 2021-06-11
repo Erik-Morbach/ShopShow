@@ -2,7 +2,7 @@
     function login($inputPassCode){    
         if(!isset($inputPassCode)) return false;
 
-        require("../connection.php");
+        require("../database/connection.php");
 
 
         $query = sprintf("select * from employee e where e.passCode like \"%s\"",$inputPassCode);
