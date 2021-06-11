@@ -1,6 +1,6 @@
 <?php
     function deleteProduct($id){
-        if($_SESSION["user"]["type"]=="SEARCH") return false;
+        if($_SESSION["user"]["type"]=="SALES") return false;
         if(!isset($id)) return false;
 
         require("../database/connection.php");

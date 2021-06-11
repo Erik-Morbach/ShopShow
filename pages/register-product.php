@@ -25,33 +25,40 @@
 
             <h1 class="title"> Cadastro produto </h1>
             
-            <form class="form" action="">
+            <form class="form" action="register-product.php" method="POST">
 
                 <input 
                 class="input" 
                 type="text"
-                placeholder="Nome do funcionário"
+                name="description"
+                placeholder="Descricao do Produto"
                 />
 
                 <input 
                 class="input" 
                 type="text"
-                placeholder="Código do funcionário"
+                name="price"
+                placeholder="Preço do Produto"
                 />
 
-                <select 
-                name="" 
-                id=""
-                class="select" 
-                >
-                <option value="" disabled selected hidden >Selecione o cargo do funcionario</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <input type="submit" name="submit">
 
-                </select>
+                <?php
+                    session_start();
+                    include_once("../php/register-product.function.php");
+                    if(isset($_POST["submit"])){
+                        $error = !registerProduct($_POST["description"],$_POST["price"]);
 
+                        echo "<span>";
+                        if($error)
+                            echo "Erro ao cadastrar produto";
+                        else 
+                            echo "Produto cadastrado com sucesso";
+                        echo "<span>";
+                    }
+                    $_POST=array();
 
+                ?>
             </form>
 
         </div>

@@ -19,18 +19,17 @@
             <h3 class="sub-title"> Bom ter você como funcionário! </h3>
             
             <form class="form" action="login.php" method="POST">
-                <input class="input" name="code" type="text" placeholder="Insira seu código"/>
-                <button type="submit">
+                <input class="input" name="code" type="text" maxlength="6" placeholder="Insira seu código"/>
+                <button type="submit" name="submit">
                     Logar
                 </button>
                 <?php
+                    session_start();
                     include_once("../php/login.function.php");
                     
-                    if(isset($_POST['code'])) {
-
+                    if(isset($_POST['submit'])) {
                         
                         $error = !login($_POST['code']);
-                        $_POST['code']=null;
 
                         if($error) {
                             echo "<span>";
@@ -41,7 +40,7 @@
                                 case "ADMIN": 
                                     header('location: ./register-employee.php');
                                     break;
-                                case "SEARCH":
+                                case "SALES":
                                     header('location: ./search-product.php');
                                     break;
                                 case "STOCK":
@@ -50,7 +49,7 @@
                             }
                         }
                     }
-                    $_POST['code']=null;
+                    $_POST=array();
                 ?>
             </form>
 

@@ -25,7 +25,7 @@
 
             <h1 class="title"> Cadastro funcionário </h1>
             
-            <form class="form" action="">
+            <form class="form" action="register-employee.php" method="POST">
 
                 <input 
                 class="input" 
@@ -37,8 +37,9 @@
                 <input 
                 class="input" 
                 type="text"
-                name="passCode"
+                name="code"
                 placeholder="Código do funcionário"
+                maxlength="6"
                 />
 
                 <select 
@@ -47,14 +48,35 @@
                 class="select" 
                 >
                 <option value="" disabled selected hidden >Selecione o cargo do funcionario</option>
-                <option value="admin">1</option>
-                <option value="searcher">2</option>
-                <option value="stock">3</option>
+                <option value="ADMIN">Administrador</option>
+                <option value="SALES">Vendedor</option>
+                <option value="STOCK">Gerente de estoque</option>
 
                 </select>
 
+                <input type="submit" name="submit">
+                </input>                
 
+                <?php
+                    session_start();
+                    include_once("../php/register-employee.function.php");
+
+                    if(isset($_POST["submit"])){
+                        $error = !registerEmployee($_POST["code"],$_POST["name"],$_POST["type"]);
+                        echo "<span>";
+                        if($error)
+                            echo "Não foi possivel cadastrar novo funcionário, verifique os dados digitados";
+                        else 
+                            echo "Funcionário cadastrado com sucesso";
+                        echo "<span>";
+                        
+                    } 
+                    $_POST = array();
+
+                ?>
             </form>
+
+
 
         </div>
 

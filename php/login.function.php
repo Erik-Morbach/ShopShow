@@ -1,5 +1,7 @@
 <?php 
     function login($inputPassCode){    
+        session_start();
+
         if(!isset($inputPassCode)) return false;
 
         require("../database/connection.php");
@@ -9,8 +11,7 @@
         if($result = $connection->query($query)){
             $response = $result->fetch_assoc();
 
-            if(!isset($_SESSION)) session_start();
-
+            $_SESSION["user"] = array();
             $_SESSION["user"]["code"] = $response["code"];
             $_SESSION["user"]["name"] = $response["name"];
             $_SESSION["user"]["type"] = $response["type"];

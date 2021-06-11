@@ -25,13 +25,36 @@
 
             <h1 class="title"> Procurar produto </h1>
             
-            <form class="form" action="">
+            <form class="form" action="search-product.php" method="POST">
 
                 <input 
                 class="input" 
                 type="text"
+                name="description"
                 placeholder="Nome do produto"
                 />
+                <input type="submit" name="submit"/>
+
+                <?php
+                    session_start();
+                    include_once("../php/search.function.php");
+                    if(isset($_POST["submit"])){
+                        $error = !search($_POST["description"]);
+
+
+                        if($error){
+                            echo "<pan>";
+                            echo "Erro ao buscar produto";
+                            echo "<pan>";
+                        }
+                        else{
+                            foreach($_SESSION["productList"] as $product){
+                                echo sprintf("<br>%d %s %lf<br>",$product["id"],$product["description"],$product["price"]);
+                            }
+                        }
+                    }
+                    $_POST = array();
+                ?>
 
             </form>
 
