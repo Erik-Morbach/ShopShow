@@ -3,7 +3,7 @@
         if(session_status()!=PHP_SESSION_ACTIVE) return false;
         if(!isset($description)) return false;
 
-        require("../connection.php");
+        require("../../database/connection.php");
         
         $inputProductDescription = $_POST["description"];
 
@@ -16,4 +16,4 @@
         $connection->close();
         return false;
     }
-?>
+    ?>

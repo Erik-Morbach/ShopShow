@@ -1,16 +1,14 @@
 <?php 
     function login($inputPassCode){    
         if(!isset($inputPassCode)) return false;
+        require("../../database/connection.php");
 
-        require("../connection.php");
-
-
-        $query = sprintf("select * from employee e where e.passCode like \"%s\"",$inputPassCode);
+        $query = sprintf("select * from employee e where e.code like \"%s\"",$inputPassCode);
 
         if($result = $connection->query($query)){
             $response = $result->fetch_assoc();
 
-            session_start();
+            if(!isset($_SESSION)) session_start();
 
             $_SESSION["userPassCode"] = $response["passCode"];
             $_SESSION["userName"]     = $response["name"];
