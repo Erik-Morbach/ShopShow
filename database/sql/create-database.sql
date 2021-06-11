@@ -3,14 +3,14 @@ create database if not exists shopShow;
 use shopShow;
 
 create table if not exists employee(
-	employeeId bigint primary key auto_increment unique not null,
-    passCode varchar(6) unique not null,
+	id bigint primary key auto_increment unique not null,
+    code varchar(6) unique not null,
     name varchar(20) not null,
-    type enum("admin","searcher","stock")
+    type enum("ADMIN","SEARCH","STOCK")
 );
 
 create table if not exists product(
-	productId bigint primary key auto_increment unique not null,
+	id bigint primary key auto_increment unique not null,
     description varchar(50) not null,
-    unitPrice Decimal(10,2)
+    price Decimal(10,2)
 );
