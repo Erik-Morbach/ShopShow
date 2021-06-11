@@ -29,7 +29,7 @@
                     if(isset($_POST['code'])) {
 
                         
-                        $error = login($_POST['code']);
+                        $error = !login($_POST['code']);
                         $_POST['code']=null;
 
                         if($error) {
