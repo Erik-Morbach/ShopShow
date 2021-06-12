@@ -11,14 +11,18 @@
 
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 
 <body>
+    <?php 
+        include_once("../php/test-access.function.php");
+        test_access_permissions(array("ADMIN"));
+    ?>
     <div class="container">
         <div class="box-title">
             <h1 class="title">CADASTRO FUNCIONÁRIO</h1>
@@ -43,8 +47,8 @@
                         else 
                             echo "Funcionário cadastrado com sucesso";
                         echo "<span>";
+                        $_POST["register"] = NULL;
                     } 
-                    $_POST = array();
                 ?>
             </form>
 
@@ -64,10 +68,11 @@
                             CARGO
                         </th>
                         <th>
-                            <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
+                            <input class="save" type="submit" name="save" value="SALVAR ALTERAÇÕES" />
                         </th>
                     </tr>
                     <?php
+                        session_start();
                         include_once('../php/list-employees.function.php');
                         include_once('../php/delete-employee.function.php');
                         function select_type_options($employee_type) {
@@ -93,9 +98,10 @@
                             }
                         }
                         function map_employees($employee) {
-                            if($_POST["DELETE-".$employee["id"]]) {
+                            if(isset($_POST['del_'.$employee["id"]])) {
                                 delete_employee($employee["id"]);
-                            } else {
+                            }
+                            else{
                                 echo "<tr>";
                                 echo    "<td>";
                                 echo        $employee["id"];
@@ -112,7 +118,7 @@
                                 echo        '</ select>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input name="DELETE-'.$employee["id"].'" type="submit" class="delete" value="DELETAR"/>';
+                                echo        '<input name="del_'.$employee["id"].'" type="submit" class="delete" value="DELETAR"/>';
                                 echo    "</td>";
                             }
                         }

@@ -10,10 +10,10 @@
 </head>
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 <body>  
@@ -36,8 +36,8 @@
                         else 
                             echo "Produto cadastrado com sucesso";
                         echo "<span>";
+                        $_POST["submit"]=NULL;
                     }
-                    $_POST=array();
                 ?>
             </form>
             <form method="POST" action="product.php">
