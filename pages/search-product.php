@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/global.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="../css/table.css">
+    <title>Buscar</title>
 </head>
 
 <header>
@@ -28,7 +29,19 @@
             <h1 class="title">PROCURAR PRODUTO</h1>
             <form class="form" action="search-product.php" method="POST">
                 <input class="input" type="text" name="description" placeholder="Nome do produto" />
-                <input type="submit" name="submit"/>
+                <input class="button-default" type="submit" name="submit"/>
+                <table class="table">
+                    <tr>
+                        <th>
+                            IDENTIFICADOR
+                        </th>
+                        <th>
+                            DESCRIÇÃO
+                        </th>
+                        <th>
+                            PREÇO
+                        </th>
+                    </tr>
                 <?php
                     session_start();
                     include_once('../php/search-product.function.php');
@@ -60,8 +73,8 @@
                     }
                     $_POST = array();
                 ?>
+                </table>
             </form>
-
         </div>
 
     </div>

@@ -35,7 +35,7 @@
                     <option value="SALES">Vendedor</option>
                     <option value="STOCK">Estoque</option>
                 </select>
-                <input class="register" type="submit" name="register" value="CADASTRAR"/>               
+                <input class="button-default" class="register" type="submit" name="register" value="CADASTRAR"/>               
                 <?php
                     session_start();
                     include_once("../php/register-employee.function.php");
