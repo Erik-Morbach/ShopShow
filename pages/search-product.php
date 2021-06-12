@@ -26,6 +26,21 @@
             <form class="form" action="search-product.php" method="POST">
                 <input class="input" type="text" name="description" placeholder="Nome do produto" />
                 <input type="submit" name="submit"/>
+                <table class="table">
+                    <tr>
+                        <th>
+                            IDENTIFICADOR
+                        </th>
+                        <th>
+                            DESCRIÇÃO
+                        </th>
+                        <th>
+                            PREÇO
+                        </th>
+                        <th>
+                            <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
+                        </th>
+                    </tr>
                 <?php
                     session_start();
                     include_once('../php/search-product.function.php');
@@ -57,8 +72,8 @@
                     }
                     $_POST = array();
                 ?>
+                </table>
             </form>
-
         </div>
 
     </div>

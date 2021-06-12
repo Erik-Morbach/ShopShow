@@ -56,7 +56,6 @@
                             <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
                         </th>
                     </tr>
-                </table>
                 <?php
                         include_once('../php/list-product.function.php');
                         include_once('../php/delete-product.function.php');
@@ -83,6 +82,7 @@
                         if($found && sizeof($_SESSION["product"]["list"]) > 0)
                             array_map("map_products", $_SESSION["product"]["list"]);
                 ?>
+                </table>
             </form>
         </div>
     </div>
