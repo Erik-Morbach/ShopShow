@@ -10,15 +10,18 @@
 
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="register-employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="register-product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 
 <body>
-    
+    <?php 
+        include_once("../php/test-access.function.php");
+        test_access_permissions(array("ADMIN","STOCK"));
+    ?> 
     <div class="container">
 
         <div class="box-title">

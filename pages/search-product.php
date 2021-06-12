@@ -10,15 +10,18 @@
 
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="register-employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="register-product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 
 <body>
-    
+    <?php 
+        include_once("../php/test-access.function.php");
+        test_access_permissions(array("ADMIN","STOCK","SALES"));
+    ?> 
     <div class="container">
 
         <div class="box-title">
@@ -37,9 +40,9 @@
 
                 <?php
                     session_start();
-                    include_once("../php/search.function.php");
+                    include_once("../php/search-product.function.php");
                     if(isset($_POST["submit"])){
-                        $error = !search($_POST["description"]);
+                        $error = !search_product($_POST["description"]);
 
 
                         if($error){
@@ -48,7 +51,7 @@
                             echo "<span>";
                         }
                         else{
-                            foreach($_SESSION["productList"] as $product){
+                            foreach($_SESSION["product"]["search"] as $product){
                                 echo sprintf("<br>%d %s %lf<br>",$product["id"],$product["description"],$product["price"]);
                             }
                         }
