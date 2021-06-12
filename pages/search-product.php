@@ -43,9 +43,9 @@
 
 
                         if($error){
-                            echo "<pan>";
+                            echo "<span>";
                             echo "Erro ao buscar produto";
-                            echo "<pan>";
+                            echo "<span>";
                         }
                         else{
                             foreach($_SESSION["productList"] as $product){

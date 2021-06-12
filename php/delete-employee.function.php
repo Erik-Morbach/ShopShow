@@ -1,5 +1,5 @@
 <?php
-    function deleteEmployee($id){
+    function delete_employee($id){
         session_start();
         if($_SESSION["user"]["type"]!="ADMIN") return false;
         if(!isset($id)) return false;
