@@ -1,5 +1,6 @@
 <?php
     function editProduct($id, $description,$price){
+        session_start();
         if($_SESSION["user"]["type"]=="SALES") return false;
         foreach(array($id,$description,$price) as $field)
             if(!isset($field)) return false;

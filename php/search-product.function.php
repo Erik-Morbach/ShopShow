@@ -10,7 +10,7 @@
         $query = "select * from product p where p.description like lower(\"%$inputProductDescription%\")";
         if($result = $connection->query($query)){
             $response = $result->fetch_all(MYSQLI_ASSOC);
-            $_SESSION["productList"] = $response; 
+            $_SESSION["product"]["search"] = $response; 
             return true;
         }
         $connection->close();

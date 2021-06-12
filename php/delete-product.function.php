@@ -1,5 +1,6 @@
 <?php
     function deleteProduct($id){
+        session_start();
         if($_SESSION["user"]["type"]=="SALES") return false;
         if(!isset($id)) return false;
 

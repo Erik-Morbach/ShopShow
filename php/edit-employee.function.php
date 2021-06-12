@@ -1,5 +1,6 @@
 <?php
     function editEmployee($id, $code,$name, $type){
+        session_start();
         if($_SESSION["user"]["type"]!="ADMIN") return false;
         foreach(array($id,$code,$name,$type) as $field)
             if(!isset($field)) return false;
