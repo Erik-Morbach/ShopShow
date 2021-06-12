@@ -10,10 +10,10 @@
 </head>
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 <body>  
@@ -23,7 +23,7 @@
             <form class="form" action="product.php" method="POST">
                 <input class="input" type="text" name="description" placeholder="Descricao do Produto"/>
                 <input class="input" type="text" name="price" placeholder="Preço do Produto" />
-                <input type="submit" name="submit">
+                <input class="button-default" type="submit" name="submit">
                 <?php
                     session_start();
                     include_once("../php/register-product.function.php");
@@ -36,8 +36,8 @@
                         else 
                             echo "Produto cadastrado com sucesso";
                         echo "<span>";
+                        $_POST["submit"]=NULL;
                     }
-                    $_POST=array();
                 ?>
             </form>
             <form method="POST" action="product.php">
@@ -53,36 +53,46 @@
                             PREÇO
                         </th>
                         <th>
-                            <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
+                            <input class="save" type="submit" name="save" value="SALVAR ALTERAÇÕES" />
                         </th>
                     </tr>
-                </table>
                 <?php
-                        include_once('../php/list-product.function.php');
+                        include_once('../php/list-products.function.php');
                         include_once('../php/delete-product.function.php');
+                        include_once('../php/edit-product.function.php');
+
                         function map_products($product) {
-                            if($_POST["DELETE-".$product["id"]]) {
-                                delete_employee($product["id"]);
+                            $id = $product["id"];
+                            if(isset($_POST["save"])){
+                                if(edit_product($id,$_POST["description_$id"],$_POST["price_$id"])){
+                                    $product["description"] = $_POST["description_$id"];
+                                    $product["price"] = $_POST["price_$id"];
+                                }        
+                            }
+                            if($_POST["delete_".$product["id"]]) {
+                                delete_product($product["id"]);
                             } else {
                                 echo "<tr>";
                                 echo    "<td>";
-                                echo        $product["id"];
+                                echo        $id;
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="text" value="'.$product["description"].'"/>';
+                                echo        '<input name="description_'.$id.'" class="table-input" type="text" value="'.$product["description"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="number" min="50" value="'.$product["price"].'"/>';
+                                echo        '<input name="price_'.$id.'" class="table-input" step="0.01" type="number" min="0" value="'.$product["price"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input name="DELETE-'.$product["id"].'" type="submit" class="delete" value="DELETAR"/>';
+                                echo        '<input name="delete_'.$id.'" type="submit" class="delete" value="DELETAR"/>';
                                 echo    "</td>";
+                                echo "</tr>";
                             }
                         }
                         $found = list_products();
                         if($found && sizeof($_SESSION["product"]["list"]) > 0)
                             array_map("map_products", $_SESSION["product"]["list"]);
                 ?>
+                </table>
             </form>
         </div>
     </div>

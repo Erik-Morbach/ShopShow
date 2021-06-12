@@ -11,14 +11,18 @@
 
 <header>
     <nav class="menu">
-        <a href="" class="item-menu">FUNCIONARIOS</a>
-        <a href="" class="item-menu">PROCURAR</a>
-        <a href="" class="item-menu">PRODUTOS</a>
-        <a href="" class="item-menu">SAIR</a>
+        <a href="employee.php" class="item-menu">FUNCIONARIOS</a>
+        <a href="search-product.php" class="item-menu">PROCURAR</a>
+        <a href="product.php" class="item-menu">PRODUTOS</a>
+        <a href="exit.php" class="item-menu">SAIR</a>
     </nav>
 </header>
 
 <body>
+    <?php 
+        include_once("../php/test-access.function.php");
+        test_access_permissions(array("ADMIN"));
+    ?>
     <div class="container">
         <div class="box-title">
             <h1 class="title">CADASTRO FUNCIONÁRIO</h1>
@@ -31,7 +35,7 @@
                     <option value="SALES">Vendedor</option>
                     <option value="STOCK">Estoque</option>
                 </select>
-                <input class="register" type="submit" name="register" value="CADASTRAR"/>               
+                <input class="button-default" class="register" type="submit" name="register" value="CADASTRAR"/>               
                 <?php
                     session_start();
                     include_once("../php/register-employee.function.php");
@@ -43,8 +47,8 @@
                         else 
                             echo "Funcionário cadastrado com sucesso";
                         echo "<span>";
+                        $_POST["register"] = NULL;
                     } 
-                    $_POST = array();
                 ?>
             </form>
 
@@ -64,11 +68,13 @@
                             CARGO
                         </th>
                         <th>
-                            <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
+                            <input class="save" type="submit" name="save" value="SALVAR ALTERAÇÕES" />
                         </th>
                     </tr>
                     <?php
+                        session_start();
                         include_once('../php/list-employees.function.php');
+                        include_once('../php/edit-employee.function.php');
                         include_once('../php/delete-employee.function.php');
                         function select_type_options($employee_type) {
                             $admin = '<option value="ADMIN">Administrador</option>';
@@ -93,26 +99,35 @@
                             }
                         }
                         function map_employees($employee) {
-                            if($_POST["DELETE-".$employee["id"]]) {
-                                delete_employee($employee["id"]);
-                            } else {
+                            $id = $employee["id"];
+                            if(isset($_POST["save"])){
+                                if(edit_employee($id,$_POST["code_$id"],$_POST["name_$id"],$_POST["type_$id"])){
+                                    $employee["code"] = $_POST["code_$id"];
+                                    $employee["name"] = $_POST["name_$id"];
+                                    $employee["type"] = $_POST["type_$id"];
+                                }
+                            }
+                            if(isset($_POST['del_'.$id])) {
+                                delete_employee($id);
+                            }
+                            else{
                                 echo "<tr>";
                                 echo    "<td>";
-                                echo        $employee["id"];
+                                echo        $id;
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="text" value="'.$employee["code"].'"/>';
+                                echo        '<input name="code_'.$id.'" class="table-input" type="text" value="'.$employee["code"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="text" value="'.$employee["name"].'"/>';
+                                echo        '<input name="name_'.$id.'" class="table-input" type="text" value="'.$employee["name"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<select class="table-select" id="type">';
+                                echo        '<select name="type_'.$id.'" class="table-select" id="type">';
                                 select_type_options($employee["type"]);
                                 echo        '</ select>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input name="DELETE-'.$employee["id"].'" type="submit" class="delete" value="DELETAR"/>';
+                                echo        '<input name="del_'.$employee["id"].'" type="submit" class="delete" value="DELETAR"/>';
                                 echo    "</td>";
                             }
                         }

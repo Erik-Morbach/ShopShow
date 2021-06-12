@@ -20,7 +20,7 @@
             
             <form class="form" action="login.php" method="POST">
                 <input class="input" name="code" type="text" maxlength="6" placeholder="Insira seu código"/>
-                <button type="submit" name="submit">
+                <button class="button-default" type="submit" name="submit">
                     Logar
                 </button>
                 <?php

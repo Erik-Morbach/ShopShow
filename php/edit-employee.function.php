@@ -1,5 +1,5 @@
 <?php
-    function editEmployee($id, $code,$name, $type){
+    function edit_employee($id, $code,$name, $type){
         session_start();
         if($_SESSION["user"]["type"]!="ADMIN") return false;
         foreach(array($id,$code,$name,$type) as $field)
@@ -7,7 +7,7 @@
 
         require("../database/connection.php");
 
-        $query = "update employee e set e.code=$code, e.name=$name, e.type=$type where e.id=$id";
+        $query = "update employee e set e.code=\"$code\", e.name=\"$name\", e.type=\"$type\" where e.id=$id";
 
         if($result = $connection->query($query)){
             return true;

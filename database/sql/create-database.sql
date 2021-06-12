@@ -14,3 +14,4 @@ create table if not exists product(
     description varchar(50) not null,
     price Decimal(10,2)
 );
+

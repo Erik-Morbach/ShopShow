@@ -137,3 +137,17 @@ option {
     font-weight: 800;
     transition: color linear .5s, font-weight linear .5s;
 }
+
+.button-default {
+    height: 50px;
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button-default:hover{
+    opacity: 0.4;
+}

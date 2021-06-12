@@ -1,7 +1,6 @@
 <?php   
     function list_products(){
         session_start();
-        if(!isset($description)) return false;
 
         require("../database/connection.php");
 
