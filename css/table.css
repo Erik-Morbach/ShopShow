@@ -1,0 +1,61 @@
+table.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+input[type=text].table-input,
+input[type=number].table-input,
+select.table-select {
+    text-align: center;
+    border: 0;
+    height: 50px;
+    width: 100%;
+}
+  
+input[type=text].table-input:focus, 
+input[type=number].table-input:focus {
+  /*   outline: 2px solid; */
+    outline: 0;
+}
+  
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  padding: 0;
+  color: white;
+  background-color: #1E88E5;
+  text-align: center;
+  height: 60px;
+}
+
+td {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+td input[type="submit"].delete {
+  border: 0;
+  background-color: red;
+  color: white;
+  height: 50px;
+  width: 100%;
+}
+
+th input[type="submit"].save {
+  border: 0;
+  background-color: green;
+  color: white;
+  height: 60px;
+  width: 100%;
+}
+
+th input[type="submit"]:hover,
+td input[type="submit"]:hover {
+  opacity: 0.5;
+}
