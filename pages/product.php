@@ -53,29 +53,39 @@
                             PREÇO
                         </th>
                         <th>
-                            <input class="save" type="submit" name="SAVE" value="SALVAR ALTERAÇÕES" />
+                            <input class="save" type="submit" name="save" value="SALVAR ALTERAÇÕES" />
                         </th>
                     </tr>
                 <?php
                         include_once('../php/list-products.function.php');
                         include_once('../php/delete-product.function.php');
+                        include_once('../php/edit-product.function.php');
+
                         function map_products($product) {
-                            if($_POST["DELETE-".$product["id"]]) {
-                                delete_employee($product["id"]);
+                            $id = $product["id"];
+                            if(isset($_POST["save"])){
+                                if(edit_product($id,$_POST["description_$id"],$_POST["price_$id"])){
+                                    $product["description"] = $_POST["description_$id"];
+                                    $product["price"] = $_POST["price_$id"];
+                                }        
+                            }
+                            if($_POST["delete_".$product["id"]]) {
+                                delete_product($product["id"]);
                             } else {
                                 echo "<tr>";
                                 echo    "<td>";
-                                echo        $product["id"];
+                                echo        $id;
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="text" value="'.$product["description"].'"/>';
+                                echo        '<input name="description_'.$id.'" class="table-input" type="text" value="'.$product["description"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input class="table-input" type="number" min="50" value="'.$product["price"].'"/>';
+                                echo        '<input name="price_'.$id.'" class="table-input" step="0.01" type="number" min="0" value="'.$product["price"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<input name="DELETE-'.$product["id"].'" type="submit" class="delete" value="DELETAR"/>';
+                                echo        '<input name="delete_'.$id.'" type="submit" class="delete" value="DELETAR"/>';
                                 echo    "</td>";
+                                echo "</tr>";
                             }
                         }
                         $found = list_products();

@@ -1,6 +1,6 @@
 <?php
     function search_product($description){
-        if(session_status()!=PHP_SESSION_ACTIVE) return false;
+        session_start();
         if(!isset($description)) return false;
 
         require("../database/connection.php");
