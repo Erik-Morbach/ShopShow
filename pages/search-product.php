@@ -22,40 +22,41 @@
     <div class="container">
 
         <div class="box-title">
-
-            <h1 class="title"> Procurar produto </h1>
-            
+            <h1 class="title">PROCURAR PRODUTO</h1>
             <form class="form" action="search-product.php" method="POST">
-
-                <input 
-                class="input" 
-                type="text"
-                name="description"
-                placeholder="Nome do produto"
-                />
+                <input class="input" type="text" name="description" placeholder="Nome do produto" />
                 <input type="submit" name="submit"/>
-
                 <?php
                     session_start();
-                    include_once("../php/search.function.php");
-                    if(isset($_POST["submit"])){
-                        $error = !search($_POST["description"]);
+                    include_once('../php/search-product.function.php');
 
+                    function map_products($product) {
+                        echo "<tr>";
+                        echo    "<td>";
+                        echo        $product["id"];
+                        echo    "</td>";
+                        echo    "<td>";
+                        echo        $product["description"];
+                        echo    "</td>";
+                        echo    "<td>";
+                        echo        $product["price"];
+                        echo    "</td>";
+                    }
+
+                    if(isset($_POST["submit"])){
+                        $error = !search_product($_POST["description"]);
 
                         if($error){
                             echo "<span>";
                             echo "Erro ao buscar produto";
                             echo "<span>";
                         }
-                        else{
-                            foreach($_SESSION["productList"] as $product){
-                                echo sprintf("<br>%d %s %lf<br>",$product["id"],$product["description"],$product["price"]);
-                            }
-                        }
+                    
+                        if(!$error && sizeof($_SESSION["product"]["search"]) > 0)
+                            array_map("map_products", $_SESSION["products"]["search"]);
                     }
                     $_POST = array();
                 ?>
-
             </form>
 
         </div>

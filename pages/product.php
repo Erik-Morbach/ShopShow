@@ -79,10 +79,10 @@
                                 echo    "</td>";
                             }
                         }
-                        $found = list_employees();
-                        if($found && sizeof($_SESSION["products"]) > 0)
-                            array_map("map_products", $_SESSION["products"]);
-                    ?>
+                        $found = list_products();
+                        if($found && sizeof($_SESSION["product"]["list"]) > 0)
+                            array_map("map_products", $_SESSION["product"]["list"]);
+                ?>
             </form>
         </div>
     </div>
