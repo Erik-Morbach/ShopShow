@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/table.css">
-    <title>Login</title>
+    <title>Funcionários</title>
 </head>
 
 <header>
@@ -22,7 +22,7 @@
     <div class="container">
         <div class="box-title">
             <h1 class="title">CADASTRO FUNCIONÁRIO</h1>
-            <form class="form" action="register-employee.php" method="POST">   
+            <form class="form" action="employee.php" method="POST">   
                 <input class="input" type="text" name="name" placeholder="Nome do funcionário" />
                 <input class="input" type="text" name="code" placeholder="Código do funcionário" maxlength="6" />
                 <select name="type" id="" class="select" >
@@ -48,7 +48,7 @@
                 ?>
             </form>
 
-            <form method="POST" action="resgister-employee.php">
+            <form method="POST" action="employee.php">
                 <table class="table">
                     <tr>
                         <th>
@@ -68,14 +68,29 @@
                         </th>
                     </tr>
                     <?php
-                        include_once('../php/list_employees.function.php');
+                        include_once('../php/list-employees.function.php');
                         include_once('../php/delete-employee.function.php');
-                        function select_type_options() {
-                            echo '
-                                <option value="ADMIN">Administrador</option>
-                                <option value="SALES">Vendedor</option>
-                                <option value="STOCK">Estoque</option>
-                            ';
+                        function select_type_options($employee_type) {
+                            $admin = '<option value="ADMIN">Administrador</option>';
+                            $sales = '<option value="SALES">Vendedor</option>';
+                            $stock = '<option value="STOCK">Estoque</option>';
+                            switch($employee_type) {
+                                case "ADMIN":
+                                    echo '<option selected value="ADMIN">Administrador</option>';
+                                    echo $sales;
+                                    echo $stock;
+                                    break;
+                                case "SALES":
+                                    echo $admin;
+                                    echo '<option selected value="SALES">Vendedor</option>';
+                                    echo $stock;
+                                    break;
+                                case "STOCK":
+                                    echo $admin;
+                                    echo $sales;
+                                    echo '<option selected value="STOCK">Estoque</option>';
+                                    break;
+                            }
                         }
                         function map_employees($employee) {
                             if($_POST["DELETE-".$employee["id"]]) {
@@ -92,8 +107,8 @@
                                 echo        '<input class="table-input" type="text" value="'.$employee["name"].'"/>';
                                 echo    "</td>";
                                 echo    "<td>";
-                                echo        '<select class="table-select" id="type" selected="'.$employee["type"].'">';
-                                select_type_options();
+                                echo        '<select class="table-select" id="type">';
+                                select_type_options($employee["type"]);
                                 echo        '</ select>';
                                 echo    "</td>";
                                 echo    "<td>";

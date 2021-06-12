@@ -38,13 +38,13 @@
                         } else {
                             switch($_SESSION["user"]["type"]) {
                                 case "ADMIN": 
-                                    header('location: ./register-employee.php');
+                                    header('location: ./employee.php');
                                     break;
                                 case "SALES":
                                     header('location: ./search-product.php');
                                     break;
                                 case "STOCK":
-                                    header('location: ./register-product.php');
+                                    header('location: ./product.php');
                                     break;
                             }
                         }
